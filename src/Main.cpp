@@ -36,7 +36,7 @@ void processUnitig(std::string fpath) {
     logger.info("%s", utg.id.c_str());
 
     AlnGraphBoost ag(utg.seq);
-    logger.info("Graph initialized. Adding fragments ...");
+    logger.info("Graph initialized. Aligning fragments ...");
 
     dagcon::Alignment aln;
     SimpleAligner align;
@@ -49,19 +49,16 @@ void processUnitig(std::string fpath) {
         ++frgcount;
     }
         
-    logger.info("Loaded %d fragments", frgcount);
-    ag.mergeNodes();
+    logger.info("%d fragments aligned and added to graph", frgcount);
 
-    std::vector<CnsResult> seqs;
     logger.info("Generating consensus", frgcount);
-    ag.consensus(seqs, 0, 0);
-    for (auto it = seqs.begin(); it != seqs.end(); ++it) {
-        CnsResult result = *it;
-        boost::format fasta(">%s/%d_%d\n%s\n");
-        fasta % utg.id % result.range[0] % result.range[1];
-        fasta % result.seq;
-        std::cout << fasta;
-    }
+    ag.mergeNodes();
+    std::string cns;
+    ag.consensus(cns);
+    boost::format fasta(">%s\n%s\n");
+    fasta % utg.id; 
+    fasta % cns;
+    std::cout << fasta;
 }
 
 void setupLogger(log4cpp::Priority::Value priority) {

@@ -107,15 +107,9 @@ public:
     void reapNodes();
 
     /// Generates the consensus from the graph.  Must be called after
-    /// mergeNodes(). Returns the longest contiguous consensus sequence where
-    /// each base meets the minimum weight requirement.
-    /// \param minWeight sets the minimum weight for each base in the consensus. 
-    ///        default = 0
-    const std::string consensus(int minWeight=0);
-
-    /// Generates all consensus sequences from a target that meet the minimum
-    /// weight requirement.
-    void consensus(std::vector<CnsResult>& seqs, int minWeight=0, size_t minLength=500);
+    /// mergeNodes(). Returns the longest contiguous consensus sequence from 
+    /// the best path
+    void consensus(std::string& cns);
 
     /// Locates the optimal path through the graph.  Called by consensus()
     const std::vector<AlnNode> bestPath();

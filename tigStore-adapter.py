@@ -8,8 +8,11 @@ import string
 from pbcore.io import FastaIO
 from multiprocessing import Pool
 
-gkp_store = sys.argv[1]
-tig_store = sys.argv[2]
+store = sys.argv[1]
+utgid = int(sys.argv[2])
+
+gkp_store = "%s.gkpStore" % store
+tig_store = "%s.tigStore" % store
 
 rc = string.maketrans('actgACTG', 'tgacTGAC')
 
@@ -52,7 +55,7 @@ def process_unitig(unitig_id):
     idfh.close()
 
     # get the fragment sequences
-    gkcall = "gatekeeper -dumpfasta %s_frgs -allbases -iid %s.frgids %s"
+    gkcall = "gatekeeper -dumpfasta %s_frgs -iid %s.frgids %s"
     subprocess.call(shlex.split(gkcall % (utgid, utgid, gkp_store)))
 
     # load fragment seqs into memory
@@ -92,6 +95,9 @@ def process_unitig(unitig_id):
 
             fh.write('%d %d %d %s\n' % (f.frgid, f.start, f.end, qseq))
 
+process_unitig(utgid)
+
+"""
 args = shlex.split("tigStore -g %s -t %s 1 -D unitiglist"
     % (gkp_store, tig_store))
 out = subprocess.check_output(args)
@@ -105,3 +111,4 @@ for l in out:
     if l[0] == "maID":
         continue
     process_unitig(int(l[0]))
+"""
