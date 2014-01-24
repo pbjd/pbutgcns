@@ -43,6 +43,8 @@ void processUnitig(std::string fpath) {
     int frgcount = 0;
     while (ifs >> aln) {
         aln.tstr = utg.seq.substr(aln.start, aln.end-aln.start);
+        logger.debug("Aligning frg: %s, len: %d", 
+            aln.frgid.c_str(), aln.qstr.size());
         align(aln);
         dagcon::Alignment norm = normalizeGaps(aln);
         ag.addAln(norm);
@@ -51,7 +53,7 @@ void processUnitig(std::string fpath) {
         
     logger.info("%d fragments aligned and added to graph", frgcount);
 
-    logger.info("Generating consensus", frgcount);
+    logger.info("Generating consensus");
     ag.mergeNodes();
     std::string cns;
     ag.consensus(cns);
