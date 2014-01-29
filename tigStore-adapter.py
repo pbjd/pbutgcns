@@ -30,7 +30,7 @@ def process_unitig(unitig_id):
     # more self-descriptive id
     utgid = "unitig_%d" % unitig_id
 
-    tigStore_args = shlex.split("tigStore -g %s -t %s 1 -d fr -u %d"
+    tigStore_args = shlex.split("tigStore -g %s -t %s 1 -d frags -u %d"
         % (gkp_store, tig_store, unitig_id))
     frags = []
     max_coor = 0

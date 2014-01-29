@@ -36,7 +36,8 @@ void processUnitig(std::string fpath) {
     logger.info("%s", utg.id.c_str());
 
     AlnGraphBoost ag(utg.seq);
-    logger.info("Graph initialized. Aligning fragments ...");
+    logger.info("Graph initialized. Length %d", utg.seq.size());
+    logger.info("Aligning fragments ..."); 
 
     dagcon::Alignment aln;
     SimpleAligner align;
