@@ -1,7 +1,8 @@
-# Compiled Object files
+# Compiled Object files and Bindaries
 *.slo
 *.lo
 *.o
+pbutgcns
 
 # Compiled Dynamic libraries
 *.so
