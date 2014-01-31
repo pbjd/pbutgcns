@@ -3,7 +3,7 @@ include pbi.mk
 CXXFLAGS := -std=c++0x -Wall -Wuninitialized -Wno-div-by-zero -fpermissive \
 			-pedantic -c -fmessage-length=0 -MMD -MP
 
-SRCS := $(wildcard *.cpp)
+SRCS := $(wildcard src/*.cpp)
 OBJS := $(SRCS:.cpp=.o)
 LIBS := -lblasr -llog4cpp -lboost_thread -lboost_program_options -lpthread 
 
@@ -19,11 +19,11 @@ pbutgcns: $(OBJS)
 	$(CXX) $(LIBDIRS) -static -o $@ $^ $(LIBS)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(OPTIMIZE) $(INCDIRS) -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	$(CXX) $(CXXFLAGS) $(OPTIMIZE) $(INCDIRS) -Isrc -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 
 clean:
-	rm -f *.d
-	rm -f *.o
+	rm -f src/*.d
+	rm -f src/*.o
 	rm -f pbutgcns
 
 .PHONY: all clean
