@@ -259,6 +259,7 @@ int main(int argc, char* argv[]) {
         logger.info("Single-threaded. Input: %s", input.c_str());
         processUnitig(input);
     }
+    logger.info("Consensus complete.");
 
     return 0;
 }
