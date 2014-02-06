@@ -10,15 +10,13 @@ with a more direct call to lower-level API calls.
 Building
 --------
 
-### Pre-requisites
-* [pblibblasr](https://github.com/PacificBiosciences/pblibblasr) BLASR library
-* [boost](http://www.boost.org/) Popular C++ utility library (1.46 or 1.47) 
-* [log4cpp](http://log4cpp.sourceforge.net/) Logging library (1.0 or 1.1)
-
-
     > make BLASR=<path to blasr>
     > ./pbutgcns -h
 
+### Support libraries needed
+* [pblibblasr](https://github.com/PacificBiosciences/pblibblasr) BLASR library
+* [boost](http://www.boost.org/) Popular C++ utility library (1.46 or 1.47) 
+* [log4cpp](http://log4cpp.sourceforge.net/) Logging library (1.0 or 1.1)
 
 Running
 -------
