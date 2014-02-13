@@ -13,9 +13,6 @@
 ///
 /// Implemented using the boost graph library.
 
-// forward declaration 
-struct Alignment;
-
 // this allows me to forward-declare properties with graph descriptors as
 // members types 
 typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS> graphTraits;
