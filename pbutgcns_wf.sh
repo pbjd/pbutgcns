@@ -15,9 +15,10 @@ do
 done
 
 # sometimes, the utg file will be empty :-/, sooo no consensus
-[ ! -s $utg ] && echo "Skipping empty input: $utg"
+set -x
 if [ -e cns.fa ]
 then
-    set -x
     mv cns.fa $cns
+else
+    touch $cns
 fi
