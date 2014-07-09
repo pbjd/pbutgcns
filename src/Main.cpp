@@ -52,6 +52,11 @@ void processUnitig(std::string fpath) {
         logger.debug("Aligning frg: %s, len: %d", 
             aln.frgid.c_str(), aln.qstr.size());
         align(aln);
+        if (aln.qstr.size() == 0) {
+            logger.warn("Skipping failed alignment frg: %s", aln.frgid.c_str());
+            continue;
+        }
+
         dagcon::Alignment norm = normalizeGaps(aln);
         ag.addAln(norm);
         ++frgcount;
@@ -123,8 +128,15 @@ public:
         while (aln.frgid != "_s_") {
             logger.debug("Aligning frg: %s, len: %d", 
                 aln.frgid.c_str(), aln.qstr.size());
+
             align(aln);
-            cnsBuf_->push(normalizeGaps(aln));
+
+            if (aln.qstr.size() == 0) {
+                logger.warn("Skipping failed alignment frg: %s", aln.frgid.c_str());
+            } else {
+                cnsBuf_->push(normalizeGaps(aln));
+            }
+
             alnBuf_->pop(&aln);
         }
         // pass the sentinal
